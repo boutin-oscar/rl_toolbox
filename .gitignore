@@ -1,0 +1,8 @@
+**/__pycache__/
+
+results/**
+
+save_model_tmp/
+adr/
+optimize/
+test_pybullet/

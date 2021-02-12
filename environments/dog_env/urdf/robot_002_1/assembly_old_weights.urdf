@@ -1,0 +1,1394 @@
+<?xml version="1.0" ?>
+<robot name="assembly_old_weights">
+
+<material name="silver">
+  <color rgba="0.700 0.700 0.700 1.000"/>
+</material>
+
+<link name="base_link">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0 0.25 0.01"/>
+    <mass value="4.5844"/>
+    <inertia ixx="0.10896218666666657" ixy="0.0" ixz="0.0" iyy="0.018592986666666644" iyz="0.0" izz="0.12724954666666655"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fl_v61body_leg_fl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="1.3863910020006642e-14 0.006648607737863521 -0.014708098125756902"/>
+    <mass value="0.5992409824872195"/>
+    <inertia ixx="0.00017471422695690408" ixy="6.071532165918825e-17" ixz="3.491130995403324e-17" iyy="0.0006759073492009064" iyz="3.0944744138358335e-06" izz="0.0005855444521177047"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.079 -0.298 -0.0"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61body_leg_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.079 -0.298 -0.0"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61body_leg_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fr_v81body_leg_fr1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="1.3697376566312869e-14 0.006648607737863521 -0.014708098125756902"/>
+    <mass value="0.5992409824872195"/>
+    <inertia ixx="0.00017471422695690408" ixy="6.245004513516506e-17" ixz="3.480288973678469e-17" iyy="0.0006759073492009081" iyz="3.0944744138358335e-06" izz="0.0005855444521177117"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.079 -0.298 -0.0"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81body_leg_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.079 -0.298 -0.0"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81body_leg_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_bl_v21body_leg_bl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-1.3766765505351941e-14 -0.006648607737863604 -0.01470809812575689"/>
+    <mass value="0.5992409824872195"/>
+    <inertia ixx="0.00017471422695688674" ixy="6.245004513516506e-17" ixz="-3.480288973678469e-17" iyy="0.0006759073492009094" iyz="-3.094474413836267e-06" izz="0.0005855444521176978"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.079 -0.202 -0.0"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21body_leg_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.079 -0.202 -0.0"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21body_leg_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_br_v21body_leg_br1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-1.3863910020006642e-14 -0.006648607737863632 -0.014708098125756902"/>
+    <mass value="0.5992409824872195"/>
+    <inertia ixx="0.00017471422695688327" ixy="6.245004513516506e-17" ixz="-3.491130995403324e-17" iyy="0.0006759073492009081" iyz="-3.0944744138360503e-06" izz="0.0005855444521176978"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.079 -0.202 -0.0"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21body_leg_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.079 -0.202 -0.0"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21body_leg_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fl_v61motor_1_fl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-5.995204332975845e-15 0.026228618678054205 0.027782105819294068"/>
+    <mass value="2.422383061902955"/>
+    <inertia ixx="0.0017508259022941397" ixy="-4.163336342344337e-17" ixz="-3.2526065174565133e-18" iyy="0.002689812911372746" iyz="3.8473519606094936e-05" izz="0.0017005772128141916"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.079 -0.305885 0.0345"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61motor_1_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.079 -0.305885 0.0345"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61motor_1_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fl_v61scap_x_y_fl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0021679930846135315 0.011009286173284172 -1.5785983631388945e-15"/>
+    <mass value="0.32462262320031926"/>
+    <inertia ixx="0.00014272581043801857" ixy="5.719762152928826e-06" ixz="1.0842021724855044e-19" iyy="0.00015208207631171823" iyz="-3.3610267347050637e-18" izz="4.0839007951563866e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.079 -0.354385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61scap_x_y_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.079 -0.354385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61scap_x_y_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fl_v61motor_2_fl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.014728950785940165 0.04199966789210802 0.0007821058192939807"/>
+    <mass value="2.422383061902955"/>
+    <inertia ixx="0.002689812911372824" ixy="2.7755575615628914e-17" ixz="-3.847351960609515e-05" iyy="0.0017508259022941397" iyz="-1.734723475976807e-18" izz="0.0017005772128141916"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.091 -0.366385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61motor_2_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.091 -0.366385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61motor_2_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fl_v61upperleg_int_fl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.0024999999999998357 -3.321078864693128e-07 -0.10894505554394376"/>
+    <mass value="0.4048904295971011"/>
+    <inertia ixx="0.002192812785968598" ixy="3.469446951953614e-18" ixz="-1.734723475976807e-18" iyy="0.002134799097711842" iyz="-1.3877787807814457e-17" izz="5.970073171340795e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.128 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61upperleg_int_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.128 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61upperleg_int_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fl_v61link_motor_2_3_fl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.017914510831100044 -3.321078899665153e-07 0.007534024575946553"/>
+    <mass value="1.0478500101095476"/>
+    <inertia ixx="0.0016939226218073977" ixy="-6.938893903907228e-18" ixz="3.594019051485261e-05" iyy="0.0008286077071884834" iyz="-3.4801195670890184e-17" izz="0.001103927734403598"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.128 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61link_motor_2_3_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.128 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61link_motor_2_3_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fl_v61upperleg_ext_fl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.0025000000000000022 -3.322518468129587e-07 -0.08837314619383613"/>
+    <mass value="0.4829681334985331"/>
+    <inertia ixx="0.003455990510543294" ixy="0.0" ixz="-2.6020852139652106e-18" iyy="0.0032629322665156564" iyz="-7.46731843026538e-12" izz="0.00019507061125054181"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.165 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61upperleg_ext_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.165 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61upperleg_ext_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fl_v61motor_3_fl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.02227104921405984 -3.321078793638854e-07 0.0007821058192940405"/>
+    <mass value="2.422383061902955"/>
+    <inertia ixx="0.002689812911372713" ixy="5.551115123125783e-17" ixz="3.8473519606093635e-05" iyy="0.0017508259022941675" iyz="1.734723475976807e-18" izz="0.0017005772128141916"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.168 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61motor_3_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.168 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61motor_3_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fl_v61lowerleg_ext_fl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.00250000000000003 1.8038551013954685e-05 -0.08216087510741524"/>
+    <mass value="0.31920618495540254"/>
+    <inertia ixx="0.0010589635951914755" ixy="-3.469446951953614e-18" ixz="-1.734723475976807e-18" iyy="0.0010134062777222216" iyz="4.720366025903755e-07" izz="4.688734323990418e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.16 -0.408385 0.2035"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61lowerleg_ext_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.16 -0.408385 0.2035"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61lowerleg_ext_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fl_v61foot_fl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.006000000000000033 0.012499677502770146 -0.008293661771179406"/>
+    <mass value="0.2060353269232924"/>
+    <inertia ixx="5.7185279620258767e-05" ixy="5.204170427930421e-18" ixz="-1.734723475976807e-18" iyy="3.707453798035276e-05" iyz="-1.3877787807814457e-17" izz="3.117247264804862e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.155 -0.395885 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61foot_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.155 -0.395885 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61foot_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fl_v61lowerleg_int_fl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.00250000000000003 0.012518038551013744 0.08933912489258466"/>
+    <mass value="0.31920618495540254"/>
+    <inertia ixx="0.0010589635951914617" ixy="3.469446951953614e-18" ixz="1.734723475976807e-18" iyy="0.0010134062777222008" iyz="4.720366025764977e-07" izz="4.688734323991112e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.143 -0.395885 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61lowerleg_int_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.143 -0.395885 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_fl_v61lowerleg_int_fl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fr_v81motor_1_fr1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-6.022959908591474e-15 0.026228618678054205 0.027782105819294068"/>
+    <mass value="2.422383061902955"/>
+    <inertia ixx="0.0017508259022941397" ixy="-2.7755575615628914e-17" ixz="-3.2526065174565133e-18" iyy="0.002689812911372746" iyz="3.8473519606094936e-05" izz="0.0017005772128142471"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.079 -0.305885 0.0345"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81motor_1_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.079 -0.305885 0.0345"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81motor_1_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fr_v81scap_x_y_fr1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.002167993084613448 0.011009286173284227 1.5629858518551032e-15"/>
+    <mass value="0.32462262320031926"/>
+    <inertia ixx="0.0001427258104380394" ixy="-5.719762152927091e-06" ixz="-1.8973538018496328e-19" iyy="0.00015208207631171736" iyz="3.144186300207963e-18" izz="4.083900795155693e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.079 -0.354385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81scap_x_y_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.079 -0.354385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81scap_x_y_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fr_v81motor_2_fr1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.014728950785939082 0.04199966789212067 0.0007821058192940501"/>
+    <mass value="2.422383061902955"/>
+    <inertia ixx="0.002689812911372713" ixy="8.326672684688674e-17" ixz="3.847351960609385e-05" iyy="0.0017508259022941397" iyz="3.469446951953614e-18" izz="0.0017005772128141916"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.091 -0.366385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81motor_2_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.091 -0.366385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81motor_2_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fr_v81upperleg_int_fr1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0024999999999988365 -3.321078855256232e-07 -0.10894505554394371"/>
+    <mass value="0.4048904295971011"/>
+    <inertia ixx="0.002192812785968584" ixy="0.0" ixz="-8.673617379884035e-19" iyy="0.002134799097711847" iyz="-2.42861286636753e-17" izz="5.970073171340795e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.128 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81upperleg_int_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.128 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81upperleg_int_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fr_v81link_motor_2_3_fr1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.017914510831098962 -3.3210788058513074e-07 0.007534024575946585"/>
+    <mass value="1.0478500101095476"/>
+    <inertia ixx="0.0016939226218073977" ixy="-6.938893903907228e-18" ixz="-3.5940190514853627e-05" iyy="0.0008286077071884834" iyz="3.31105179081706e-17" izz="0.001103927734403598"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.128 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81link_motor_2_3_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.128 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81link_motor_2_3_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fr_v81upperleg_ext_fr1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0024999999999987532 -3.322518460358026e-07 -0.08837314619383613"/>
+    <mass value="0.4829681334985331"/>
+    <inertia ixx="0.003455990510543308" ixy="0.0" ixz="-8.673617379884035e-19" iyy="0.00326293226651566" iyz="-7.467321899712331e-12" izz="0.0001950706112505557"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.165 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81upperleg_ext_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.165 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81upperleg_ext_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fr_v81motor_3_fr1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.02227104921405859 -3.321078905216268e-07 0.0007821058192940076"/>
+    <mass value="2.422383061902955"/>
+    <inertia ixx="0.0026898129113727687" ixy="2.7755575615628914e-17" ixz="-3.847351960609537e-05" iyy="0.0017508259022941397" iyz="-3.469446951953614e-18" izz="0.001700577212814136"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.168 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81motor_3_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.168 -0.408385 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81motor_3_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fr_v81lowerleg_int_fr1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0024999999999987532 -1.869315613289846e-05 -0.08216087510741729"/>
+    <mass value="0.31920618495540254"/>
+    <inertia ixx="0.0010589635951914755" ixy="3.469446951953614e-18" ixz="0.0" iyy="0.0010134062777222078" iyz="-4.720366025764977e-07" izz="4.688734323990418e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.138 -0.408385 0.2035"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81lowerleg_int_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.138 -0.408385 0.2035"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81lowerleg_int_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fr_v81foot_fr1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.005999999999998895 0.01249966789211987 -0.008293661771181182"/>
+    <mass value="0.2060353269232924"/>
+    <inertia ixx="5.7185279620258767e-05" ixy="0.0" ixz="-1.734723475976807e-18" iyy="3.70745379803597e-05" iyz="-6.938893903907228e-18" izz="3.1172472648034744e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.143 -0.395885 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81foot_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.143 -0.395885 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81foot_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_fr_v81lowerleg_ext_fr1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.002499999999998781 0.012481306843867057 0.08933912489258294"/>
+    <mass value="0.31920618495540254"/>
+    <inertia ixx="0.0010589635951914755" ixy="0.0" ixz="-1.734723475976807e-18" iyy="0.0010134062777222078" iyz="-4.720366025764977e-07" izz="4.688734323990418e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.155 -0.395885 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81lowerleg_ext_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.155 -0.395885 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_fr_v81lowerleg_ext_fr1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_bl_v21motor_1_bl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="6.1201044232461754e-15 -0.026228618678054344 0.027782105819294082"/>
+    <mass value="2.422383061902955"/>
+    <inertia ixx="0.0017508259022941397" ixy="-3.469446951953614e-17" ixz="3.469446951953614e-18" iyy="0.0026898129113727513" iyz="-3.84735196060945e-05" izz="0.0017005772128142055"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.079 -0.194115 0.0345"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21motor_1_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.079 -0.194115 0.0345"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21motor_1_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_bl_v21scap_x_y_bl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.002167993084613268 -0.011009286173284422 1.5716594692349872e-15"/>
+    <mass value="0.32462262320031926"/>
+    <inertia ixx="0.00014272581043802985" ixy="-5.719762152927958e-06" ixz="2.168404344971009e-19" iyy="0.00015208207631171714" iyz="-3.3068166260807885e-18" izz="4.0839007951554325e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.079 -0.145615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21scap_x_y_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.079 -0.145615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21scap_x_y_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_bl_v21motor_2_bl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.01472895078593918 -0.04199966789212073 0.0007821058192940588"/>
+    <mass value="2.422383061902955"/>
+    <inertia ixx="0.0026898129113727513" ixy="5.551115123125783e-17" ixz="-3.8473519606094285e-05" iyy="0.0017508259022941466" iyz="-4.119968255444917e-18" izz="0.0017005772128142263"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.091 -0.133615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21motor_2_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.091 -0.133615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21motor_2_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_bl_v21upperleg_int_bl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.002499999999998892 3.321078855256232e-07 -0.10894505554394371"/>
+    <mass value="0.4048904295971011"/>
+    <inertia ixx="0.002192812785968593" ixy="8.673617379884035e-19" ixz="1.734723475976807e-18" iyy="0.0021347990977118522" iyz="1.734723475976807e-17" izz="5.970073171341142e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.128 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21upperleg_int_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.128 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21upperleg_int_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_bl_v21link_motor_2_3_bl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.017914510831099045 3.321078804324751e-07 0.007534024575946594"/>
+    <mass value="1.0478500101095476"/>
+    <inertia ixx="0.0016939226218073665" ixy="-1.0408340855860843e-17" ixz="3.5940190514853627e-05" iyy="0.0008286077071884973" iyz="-3.3115600105854126e-17" izz="0.001103927734403591"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.128 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21link_motor_2_3_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.128 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21link_motor_2_3_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_bl_v21upperleg_ext_bl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.002499999999998781 3.322518460496804e-07 -0.08837314619383613"/>
+    <mass value="0.4829681334985331"/>
+    <inertia ixx="0.003455990510543308" ixy="-8.673617379884035e-19" ixz="1.734723475976807e-18" iyy="0.0032629322665156633" iyz="7.467321032350593e-12" izz="0.00019507061125054875"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.165 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21upperleg_ext_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.165 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21upperleg_ext_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_bl_v21motor_3_bl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.022271049214058897 3.321078904383601e-07 0.0007821058192940249"/>
+    <mass value="2.422383061902955"/>
+    <inertia ixx="0.002689812911372748" ixy="4.85722573273506e-17" ixz="3.847351960609537e-05" iyy="0.001750825902294112" iyz="3.2526065174565133e-18" izz="0.0017005772128141916"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.168 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21motor_3_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.168 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21motor_3_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_bl_v21lowerleg_int_bl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.0024999999999988365 1.8693156132856825e-05 -0.08216087510741724"/>
+    <mass value="0.31920618495540254"/>
+    <inertia ixx="0.0010589635951914651" ixy="0.0" ixz="-1.734723475976807e-18" iyy="0.0010134062777222008" iyz="4.720366025834366e-07" izz="4.688734323990244e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.138 -0.091615 0.2035"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21lowerleg_int_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.138 -0.091615 0.2035"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21lowerleg_int_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_bl_v21foot_bl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.005999999999998923 -0.012499667892119884 -0.008293661771181127"/>
+    <mass value="0.2060353269232924"/>
+    <inertia ixx="5.718527962024489e-05" ixy="0.0" ixz="1.734723475976807e-18" iyy="3.70745379803597e-05" iyz="1.1275702593849246e-17" izz="3.117247264804255e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.143 -0.104115 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21foot_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.143 -0.104115 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21foot_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_bl_v21lowerleg_ext_bl1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.0024999999999989475 -0.012481306843867099 0.08933912489258294"/>
+    <mass value="0.31920618495540254"/>
+    <inertia ixx="0.0010589635951914651" ixy="-1.734723475976807e-18" ixz="0.0" iyy="0.0010134062777222147" iyz="4.720366025834366e-07" izz="4.688734323990244e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.155 -0.104115 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21lowerleg_ext_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.155 -0.104115 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_bl_v21lowerleg_ext_bl1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_br_v21motor_1_br1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="5.856426454897701e-15 -0.026228618678054372 0.027782105819294068"/>
+    <mass value="2.422383061902955"/>
+    <inertia ixx="0.0017508259022941536" ixy="-3.469446951953614e-17" ixz="2.8189256484623115e-18" iyy="0.002689812911372755" iyz="-3.847351960609537e-05" izz="0.0017005772128142194"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.079 -0.194115 0.0345"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21motor_1_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.079 -0.194115 0.0345"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21motor_1_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_br_v21scap_x_y_br1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.0021679930846135315 -0.011009286173284505 -1.5785983631388945e-15"/>
+    <mass value="0.32462262320031926"/>
+    <inertia ixx="0.00014272581043802898" ixy="5.719762152927958e-06" ixz="-1.3552527156068805e-19" iyy="0.00015208207631171823" iyz="3.415236843329339e-18" izz="4.0839007951554325e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.079 -0.145615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21scap_x_y_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.079 -0.145615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21scap_x_y_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_br_v21motor_2_br1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.014728950785940179 -0.04199966789210828 0.0007821058192939764"/>
+    <mass value="2.422383061902955"/>
+    <inertia ixx="0.002689812911372748" ixy="3.122502256758253e-17" ixz="3.8473519606095586e-05" iyy="0.0017508259022941466" iyz="2.3852447794681098e-18" izz="0.0017005772128142332"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.091 -0.133615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21motor_2_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.091 -0.133615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21motor_2_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_br_v21upperleg_int_br1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.0025000000000001132 3.321078863305349e-07 -0.10894505554394376"/>
+    <mass value="0.4048904295971011"/>
+    <inertia ixx="0.0021928127859685963" ixy="0.0" ixz="2.6020852139652106e-18" iyy="0.0021347990977118522" iyz="1.734723475976807e-17" izz="5.970073171340795e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.128 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21upperleg_int_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.128 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21upperleg_int_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_br_v21link_motor_2_3_br1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.01791451083109999 3.321078897583485e-07 0.007534024575946553"/>
+    <mass value="1.0478500101095476"/>
+    <inertia ixx="0.0016939226218073665" ixy="-1.3877787807814457e-17" ixz="-3.594019051485266e-05" iyy="0.0008286077071884869" iyz="3.480500731915283e-17" izz="0.0011039277344035876"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.128 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21link_motor_2_3_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.128 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21link_motor_2_3_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_br_v21upperleg_ext_br1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.002500000000000141 3.322518467435698e-07 -0.08837314619383613"/>
+    <mass value="0.4829681334985331"/>
+    <inertia ixx="0.00345599051054331" ixy="-8.673617379884035e-19" ixz="8.673617379884035e-19" iyy="0.0032629322665156703" iyz="7.467319297627117e-12" izz="0.00019507061125055222"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.165 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21upperleg_ext_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.165 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21upperleg_ext_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_br_v21motor_3_br1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0.02227104921405959 3.321078791418408e-07 0.0007821058192940362"/>
+    <mass value="2.422383061902955"/>
+    <inertia ixx="0.0026898129113727513" ixy="2.7755575615628914e-17" ixz="-3.8473519606093635e-05" iyy="0.0017508259022941397" iyz="-2.6020852139652106e-18" izz="0.0017005772128142194"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.168 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21motor_3_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.168 -0.091615 0.0075"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21motor_3_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_br_v21lowerleg_ext_br1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.00250000000000003 -1.8038551014093462e-05 -0.08216087510741535"/>
+    <mass value="0.31920618495540254"/>
+    <inertia ixx="0.0010589635951914651" ixy="-8.673617379884035e-19" ixz="1.734723475976807e-18" iyy="0.0010134062777222078" iyz="-4.720366025817019e-07" izz="4.688734323990418e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.16 -0.091615 0.2035"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21lowerleg_ext_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.16 -0.091615 0.2035"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21lowerleg_ext_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_br_v21foot_br1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.006000000000000144 -0.012499677502770437 -0.00829366177117935"/>
+    <mass value="0.2060353269232924"/>
+    <inertia ixx="5.718527962025183e-05" ixy="-4.336808689942018e-19" ixz="-1.734723475976807e-18" iyy="3.70745379803597e-05" iyz="1.214306433183765e-17" izz="3.117247264804168e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.155 -0.104115 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21foot_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.155 -0.104115 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21foot_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="leg_br_v21lowerleg_int_br1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.0025000000000001132 -0.01251803855101391 0.08933912489258466"/>
+    <mass value="0.31920618495540254"/>
+    <inertia ixx="0.0010589635951914617" ixy="8.673617379884035e-19" ixz="1.734723475976807e-18" iyy="0.0010134062777222078" iyz="-4.720366025817019e-07" izz="4.688734323990071e-05"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.143 -0.104115 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21lowerleg_int_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+    <material/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.143 -0.104115 0.375"/>
+    <geometry>
+      <mesh filename="meshes/leg_br_v21lowerleg_int_br1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rigid1" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.079 0.298 0.0"/>
+  <parent link="base_link"/>
+  <child link="leg_fl_v61body_leg_fl1"/>
+</joint>
+
+<joint name="Rigid2" type="fixed">
+  <origin rpy="0 0 0" xyz="0.079 0.298 0.0"/>
+  <parent link="base_link"/>
+  <child link="leg_fr_v81body_leg_fr1"/>
+</joint>
+
+<joint name="Rigid3" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.079 0.202 0.0"/>
+  <parent link="base_link"/>
+  <child link="leg_bl_v21body_leg_bl1"/>
+</joint>
+
+<joint name="Rigid4" type="fixed">
+  <origin rpy="0 0 0" xyz="0.079 0.202 0.0"/>
+  <parent link="base_link"/>
+  <child link="leg_br_v21body_leg_br1"/>
+</joint>
+
+<joint name="leg_fl_v61_Rigid1_fl" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 0.007885 -0.0345"/>
+  <parent link="leg_fl_v61body_leg_fl1"/>
+  <child link="leg_fl_v61motor_1_fl1"/>
+</joint>
+
+<joint name="leg_fl_v61_sh_x_fl" type="continuous">
+  <origin rpy="0 0 0" xyz="0.0 0.0485 0.027"/>
+  <parent link="leg_fl_v61motor_1_fl1"/>
+  <child link="leg_fl_v61scap_x_y_fl1"/>
+  <axis xyz="-0.0 1.0 0.0"/>
+</joint>
+<transmission name="leg_fl_v61_sh_x_fl_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leg_fl_v61_sh_x_fl">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="leg_fl_v61_sh_x_fl_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="leg_fl_v61_Rigid3_fl" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.012 0.012 0.0"/>
+  <parent link="leg_fl_v61scap_x_y_fl1"/>
+  <child link="leg_fl_v61motor_2_fl1"/>
+</joint>
+
+<joint name="leg_fl_v61_sh_y_fl" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.037 0.042 0.0"/>
+  <parent link="leg_fl_v61motor_2_fl1"/>
+  <child link="leg_fl_v61upperleg_int_fl1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+<transmission name="leg_fl_v61_sh_y_fl_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leg_fl_v61_sh_y_fl">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="leg_fl_v61_sh_y_fl_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="leg_fl_v61_Rigid5_fl" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  <parent link="leg_fl_v61upperleg_int_fl1"/>
+  <child link="leg_fl_v61link_motor_2_3_fl1"/>
+</joint>
+
+<joint name="leg_fl_v61_Rigid6_fl" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.037 0.0 0.0"/>
+  <parent link="leg_fl_v61link_motor_2_3_fl1"/>
+  <child link="leg_fl_v61upperleg_ext_fl1"/>
+</joint>
+
+<joint name="leg_fl_v61_Rigid7_fl" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.003 0.0 0.0"/>
+  <parent link="leg_fl_v61upperleg_ext_fl1"/>
+  <child link="leg_fl_v61motor_3_fl1"/>
+</joint>
+
+<joint name="leg_fl_v61_el_fl" type="continuous">
+  <origin rpy="0 0 0" xyz="0.005 0.0 -0.196"/>
+  <parent link="leg_fl_v61upperleg_ext_fl1"/>
+  <child link="leg_fl_v61lowerleg_ext_fl1"/>
+  <axis xyz="1.0 0.0 -0.0"/>
+</joint>
+<transmission name="leg_fl_v61_el_fl_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leg_fl_v61_el_fl">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="leg_fl_v61_el_fl_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="leg_fl_v61_Rigid9_fl" type="fixed">
+  <origin rpy="0 0 0" xyz="0.005 -0.0125 -0.1715"/>
+  <parent link="leg_fl_v61lowerleg_ext_fl1"/>
+  <child link="leg_fl_v61foot_fl1"/>
+</joint>
+
+<joint name="leg_fl_v61_Rigid10_fl" type="fixed">
+  <origin rpy="0 0 0" xyz="0.012 0.0 0.0"/>
+  <parent link="leg_fl_v61foot_fl1"/>
+  <child link="leg_fl_v61lowerleg_int_fl1"/>
+</joint>
+
+<joint name="leg_fr_v81_Rigid1_fr" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 0.007885 -0.0345"/>
+  <parent link="leg_fr_v81body_leg_fr1"/>
+  <child link="leg_fr_v81motor_1_fr1"/>
+</joint>
+
+<joint name="leg_fr_v81_scap_x_fr" type="continuous">
+  <origin rpy="0 0 0" xyz="0.0 0.0485 0.027"/>
+  <parent link="leg_fr_v81motor_1_fr1"/>
+  <child link="leg_fr_v81scap_x_y_fr1"/>
+  <axis xyz="-0.0 1.0 0.0"/>
+</joint>
+<transmission name="leg_fr_v81_scap_x_fr_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leg_fr_v81_scap_x_fr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="leg_fr_v81_scap_x_fr_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="leg_fr_v81_Rigid3_fr" type="fixed">
+  <origin rpy="0 0 0" xyz="0.012 0.012 0.0"/>
+  <parent link="leg_fr_v81scap_x_y_fr1"/>
+  <child link="leg_fr_v81motor_2_fr1"/>
+</joint>
+
+<joint name="leg_fr_v81_scap_y_fr" type="continuous">
+  <origin rpy="0 0 0" xyz="0.037 0.042 0.0"/>
+  <parent link="leg_fr_v81motor_2_fr1"/>
+  <child link="leg_fr_v81upperleg_int_fr1"/>
+  <axis xyz="1.0 0.0 -0.0"/>
+</joint>
+<transmission name="leg_fr_v81_scap_y_fr_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leg_fr_v81_scap_y_fr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="leg_fr_v81_scap_y_fr_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="leg_fr_v81_Rigid5_fr" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  <parent link="leg_fr_v81upperleg_int_fr1"/>
+  <child link="leg_fr_v81link_motor_2_3_fr1"/>
+</joint>
+
+<joint name="leg_fr_v81_Rigid6_fr" type="fixed">
+  <origin rpy="0 0 0" xyz="0.037 0.0 0.0"/>
+  <parent link="leg_fr_v81link_motor_2_3_fr1"/>
+  <child link="leg_fr_v81upperleg_ext_fr1"/>
+</joint>
+
+<joint name="leg_fr_v81_Rigid7_fr" type="fixed">
+  <origin rpy="0 0 0" xyz="0.003 0.0 0.0"/>
+  <parent link="leg_fr_v81upperleg_ext_fr1"/>
+  <child link="leg_fr_v81motor_3_fr1"/>
+</joint>
+
+<joint name="leg_fr_v81_el_fr" type="continuous">
+  <origin rpy="0 0 0" xyz="0.01 0.0 -0.196"/>
+  <parent link="leg_fr_v81upperleg_int_fr1"/>
+  <child link="leg_fr_v81lowerleg_int_fr1"/>
+  <axis xyz="1.0 0.0 -0.0"/>
+</joint>
+<transmission name="leg_fr_v81_el_fr_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leg_fr_v81_el_fr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="leg_fr_v81_el_fr_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="leg_fr_v81_Rigid9_fr" type="fixed">
+  <origin rpy="0 0 0" xyz="0.005 -0.0125 -0.1715"/>
+  <parent link="leg_fr_v81lowerleg_int_fr1"/>
+  <child link="leg_fr_v81foot_fr1"/>
+</joint>
+
+<joint name="leg_fr_v81_Rigid10_fr" type="fixed">
+  <origin rpy="0 0 0" xyz="0.012 0.0 0.0"/>
+  <parent link="leg_fr_v81foot_fr1"/>
+  <child link="leg_fr_v81lowerleg_ext_fr1"/>
+</joint>
+
+<joint name="leg_bl_v21_Rigid1_bl" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 -0.007885 -0.0345"/>
+  <parent link="leg_bl_v21body_leg_bl1"/>
+  <child link="leg_bl_v21motor_1_bl1"/>
+</joint>
+
+<joint name="leg_bl_v21_scap_x_bl" type="continuous">
+  <origin rpy="0 0 0" xyz="0.0 -0.0485 0.027"/>
+  <parent link="leg_bl_v21motor_1_bl1"/>
+  <child link="leg_bl_v21scap_x_y_bl1"/>
+  <axis xyz="-0.0 -1.0 0.0"/>
+</joint>
+<transmission name="leg_bl_v21_scap_x_bl_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leg_bl_v21_scap_x_bl">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="leg_bl_v21_scap_x_bl_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="leg_bl_v21_Rigid3_bl" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.012 -0.012 0.0"/>
+  <parent link="leg_bl_v21scap_x_y_bl1"/>
+  <child link="leg_bl_v21motor_2_bl1"/>
+</joint>
+
+<joint name="leg_bl_v21_scap_y_bl" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.037 -0.042 0.0"/>
+  <parent link="leg_bl_v21motor_2_bl1"/>
+  <child link="leg_bl_v21upperleg_int_bl1"/>
+  <axis xyz="-1.0 -0.0 -0.0"/>
+</joint>
+<transmission name="leg_bl_v21_scap_y_bl_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leg_bl_v21_scap_y_bl">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="leg_bl_v21_scap_y_bl_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="leg_bl_v21_Rigid5_bl" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  <parent link="leg_bl_v21upperleg_int_bl1"/>
+  <child link="leg_bl_v21link_motor_2_3_bl1"/>
+</joint>
+
+<joint name="leg_bl_v21_Rigid6_bl" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.037 0.0 0.0"/>
+  <parent link="leg_bl_v21link_motor_2_3_bl1"/>
+  <child link="leg_bl_v21upperleg_ext_bl1"/>
+</joint>
+
+<joint name="leg_bl_v21_Rigid7_bl" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.003 0.0 0.0"/>
+  <parent link="leg_bl_v21upperleg_ext_bl1"/>
+  <child link="leg_bl_v21motor_3_bl1"/>
+</joint>
+
+<joint name="leg_bl_v21_el_bl" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.01 0.0 -0.196"/>
+  <parent link="leg_bl_v21upperleg_int_bl1"/>
+  <child link="leg_bl_v21lowerleg_int_bl1"/>
+  <axis xyz="-1.0 -0.0 -0.0"/>
+</joint>
+<transmission name="leg_bl_v21_el_bl_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leg_bl_v21_el_bl">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="leg_bl_v21_el_bl_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="leg_bl_v21_Rigid9_bl" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.005 0.0125 -0.1715"/>
+  <parent link="leg_bl_v21lowerleg_int_bl1"/>
+  <child link="leg_bl_v21foot_bl1"/>
+</joint>
+
+<joint name="leg_bl_v21_Rigid10_bl" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.012 0.0 0.0"/>
+  <parent link="leg_bl_v21foot_bl1"/>
+  <child link="leg_bl_v21lowerleg_ext_bl1"/>
+</joint>
+
+<joint name="leg_br_v21_Rigid1_br" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 -0.007885 -0.0345"/>
+  <parent link="leg_br_v21body_leg_br1"/>
+  <child link="leg_br_v21motor_1_br1"/>
+</joint>
+
+<joint name="leg_br_v21_sh_x_br" type="continuous">
+  <origin rpy="0 0 0" xyz="0.0 -0.0485 0.027"/>
+  <parent link="leg_br_v21motor_1_br1"/>
+  <child link="leg_br_v21scap_x_y_br1"/>
+  <axis xyz="-0.0 -1.0 0.0"/>
+</joint>
+<transmission name="leg_br_v21_sh_x_br_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leg_br_v21_sh_x_br">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="leg_br_v21_sh_x_br_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="leg_br_v21_Rigid3_br" type="fixed">
+  <origin rpy="0 0 0" xyz="0.012 -0.012 0.0"/>
+  <parent link="leg_br_v21scap_x_y_br1"/>
+  <child link="leg_br_v21motor_2_br1"/>
+</joint>
+
+<joint name="leg_br_v21_sh_y_br" type="continuous">
+  <origin rpy="0 0 0" xyz="0.037 -0.042 0.0"/>
+  <parent link="leg_br_v21motor_2_br1"/>
+  <child link="leg_br_v21upperleg_int_br1"/>
+  <axis xyz="1.0 -0.0 0.0"/>
+</joint>
+<transmission name="leg_br_v21_sh_y_br_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leg_br_v21_sh_y_br">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="leg_br_v21_sh_y_br_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="leg_br_v21_Rigid5_br" type="fixed">
+  <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+  <parent link="leg_br_v21upperleg_int_br1"/>
+  <child link="leg_br_v21link_motor_2_3_br1"/>
+</joint>
+
+<joint name="leg_br_v21_Rigid6_br" type="fixed">
+  <origin rpy="0 0 0" xyz="0.037 0.0 0.0"/>
+  <parent link="leg_br_v21link_motor_2_3_br1"/>
+  <child link="leg_br_v21upperleg_ext_br1"/>
+</joint>
+
+<joint name="leg_br_v21_Rigid7_br" type="fixed">
+  <origin rpy="0 0 0" xyz="0.003 0.0 0.0"/>
+  <parent link="leg_br_v21upperleg_ext_br1"/>
+  <child link="leg_br_v21motor_3_br1"/>
+</joint>
+
+<joint name="leg_br_v21_el_br" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.005 0.0 -0.196"/>
+  <parent link="leg_br_v21upperleg_ext_br1"/>
+  <child link="leg_br_v21lowerleg_ext_br1"/>
+  <axis xyz="-1.0 0.0 -0.0"/>
+</joint>
+<transmission name="leg_br_v21_el_br_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leg_br_v21_el_br">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="leg_br_v21_el_br_actr">
+    <hardwareInterface>PositionJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<joint name="leg_br_v21_Rigid9_br" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.005 0.0125 -0.1715"/>
+  <parent link="leg_br_v21lowerleg_ext_br1"/>
+  <child link="leg_br_v21foot_br1"/>
+</joint>
+
+<joint name="leg_br_v21_Rigid10_br" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.012 0.0 0.0"/>
+  <parent link="leg_br_v21foot_br1"/>
+  <child link="leg_br_v21lowerleg_int_br1"/>
+</joint>
+
+</robot>
