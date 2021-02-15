@@ -1,23 +1,14 @@
 <?xml version="1.0" ?>
 <TrainingRun>
 	<Processes>
-		<Process activation_prop="relu" blindfold_prop="0" first_size_prop="512" lstm_prop="0" name="Simple Actor" save_name_prop="teacher" secound_size_prop="256" type="SimpleActorNode"/>
+		<Process adr_prob_prop="0.30000001192092896" epoch_nb_prop="2" log_std_prop="-1.0" model_save_interval_prop="10" name="Train (PPO)" ppo_cat_prop="0" rollout_len_prop="400" rollout_nb_prop="4" train_step_nb_prop="6" type="TrainPPONode"/>
 		<Process base_rot_rew_prop="1" carthesian_act_prop="1" full_parkour_prop="1" mode_prop="0" name="Dog Env" rand_delta_prop="0" simple_walk_prop="0" type="DogEnvNode"/>
-		<Process activation_prop="relu" blindfold_prop="1" first_size_prop="512" lstm_prop="1" name="Simple Actor.001" save_name_prop="expert" secound_size_prop="256" type="SimpleActorNode"/>
-		<Process adr_prob_prop="0.30000001192092896" epoch_nb_prop="20000" log_std_prop="-1.0" model_save_interval_prop="10" name="Train (PPO).001" ppo_cat_prop="0" rollout_len_prop="400" rollout_nb_prop="4" tensorboard_name_prop="expert" train_step_nb_prop="6" type="TrainPPONode"/>
-		<Process adr_prob_prop="0.30000001192092896" epoch_nb_prop="20000" log_std_prop="-1.0" model_save_interval_prop="10" name="Train (PPO)" ppo_cat_prop="0" rollout_len_prop="400" rollout_nb_prop="4" tensorboard_name_prop="teacher" train_step_nb_prop="6" type="TrainPPONode"/>
-		<Process adr_prob_prop="0.30000001192092896" epoch_nb_prop="4000" model_save_interval_prop="10" name="DistillationNode" rollout_len_prop="400" rollout_nb_prop="4" tensorboard_name_prop="expert_distil" train_step_nb_prop="3" type="DistillationNode"/>
+		<Process activation_prop="relu" blindfold_prop="1" first_size_prop="512" lstm_prop="0" name="Simple Actor" save_name_prop="expert" secound_size_prop="256" type="SimpleActorNode"/>
 	</Processes>
 	<Links>
-		<Link from_node="Dog Env" from_socket="Env" to_node="Train (PPO)" to_socket="Environment"/>
 		<Link from_node="Dog Env" from_socket="Env" to_node="Simple Actor" to_socket="Env"/>
 		<Link from_node="Simple Actor" from_socket="Actor" to_node="Train (PPO)" to_socket="Actor"/>
-		<Link from_node="Simple Actor.001" from_socket="Actor" to_node="DistillationNode" to_socket="Actor"/>
-		<Link from_node="Dog Env" from_socket="Env" to_node="Simple Actor.001" to_socket="Env"/>
-		<Link from_node="Dog Env" from_socket="Env" to_node="DistillationNode" to_socket="Environment"/>
-		<Link from_node="DistillationNode" from_socket="Trained actor" to_node="Train (PPO).001" to_socket="Actor"/>
-		<Link from_node="Dog Env" from_socket="Env" to_node="Train (PPO).001" to_socket="Environment"/>
-		<Link from_node="Train (PPO)" from_socket="Trained actor" to_node="DistillationNode" to_socket="Teacher"/>
+		<Link from_node="Dog Env" from_socket="Env" to_node="Train (PPO)" to_socket="Environment"/>
 	</Links>
 	<!--Generated from blender-->
 </TrainingRun>

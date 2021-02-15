@@ -9,8 +9,6 @@ import time
 import sys
 import shutil
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-
 #tensorboard --logdir=tensorboard --host localhost --port 8088
 
 from models.critic import Critic

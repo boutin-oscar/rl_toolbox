@@ -1,144 +1,94 @@
-# Saving and parsing data between mpi threads
 
 from mpi4py import MPI
 import numpy as np
+from collections import namedtuple
 
-rollout_comp = ["s", "a", "prim_a", "r", "neglog", "mask", "last_values", "gae", "new_value"]
+# the singe element that holds all the data
+store_dict = {}
 
 
-# ------- STORAGE SYSTEM -------
+# a msg is always a dict of Entries. 
+Entry = namedtuple('Entry', ['action', 'value'])
+"""
+action can be :
+set		-> sets the value
+add		-> adds the value (excepts a list in the right slot)
+update	-> updates the dict (expects a dict or nothing in the right slot)
+get		-> asks the value of the field (wait fot the field to be present)
+get_l	-> get last value elems of the list (wait for the list to fill up)
 
-# network weights storage system
+"""
 
-_has_weights = True
-_weights = ""
+# a tuple to store the functions per action
+class Action:
+	def process (key, value):
+		raise NameError('not implemented')
+	def feasable (key, value):
+		raise NameError('not implemented')
+	def data (key, value):
+		raise NameError('not implemented')
+action_dict = {}
 
-def store_weights (weights):
-	global _has_weights
-	global _weights
-	_weights = weights
-	_has_weights = True
 
-def weights_sendable ():
-	return _has_weights
-
-def send_weights ():
-	return _weights
-
-# critic weights storage system
-
-_has_critic = True
-_critic = ""
-
-def store_critic (critic):
-	global _has_critic
-	global _critic
-	_critic = critic
-	_has_critic = True
-
-def critic_sendable ():
-	return _has_critic
-
-def send_critic ():
-	return _critic
-
-# primitive weights storage system
-
-_has_primitive = True
-_primitive = []
-
-def store_primitive (primitive):
-	global _has_primitive
-	global _primitive
-	_primitive = primitive
-	_has_primitive = True
-
-def primitive_sendable ():
-	return _has_primitive
-
-def send_primitive ():
-	return _primitive
-
-# rollout storage system
-
-rollouts = {key:[] for key in rollout_comp}
-rollouts_nb = {key:0 for key in rollout_comp}
-sent_rollout_nb = 0
-dumped_rollouts = 0
-
-def store_rollout (x, key):
-	rollouts[key].append(x)
-	rollouts_nb[key] += x.shape[0]
-
-def rollout_sendable (key):
-	return rollouts_nb[key] >= sent_rollout_nb
-
-def send_rollout (key):
-	global dumped_rollouts
-	to_return = np.concatenate(rollouts[key])[-sent_rollout_nb:]
-	dumped_rollouts = rollouts_nb[key] - sent_rollout_nb
+class SetAction (Action):
+	def process (key, value):
+		store_dict[key] = value
+	def feasable (key, value):
+		return True
+	def data (key, value):
+		return
+action_dict['set'] = SetAction
 	
-	rollouts[key] = []
-	rollouts_nb[key] = 0
-	
-	return to_return
+class AddAction (Action):
+	def process (key, value):
+		if not key in store_dict:
+			store_dict[key] = []
+		store_dict[key].append(value)
+	def feasable (key, value):
+		return True
+	def data (key, value):
+		return
+action_dict['add'] = AddAction
+		
+class UpdateAction (Action):
+	def process (key, value):
+		if not key in store_dict:
+			store_dict[key] = {}
+		store_dict[key].update(value)
+	def feasable (key, value):
+		return True
+	def data (key, value):
+		return
+action_dict['update'] = UpdateAction
+		
+class GetAction (Action):
+	def process (key, value):
+		pass
+	def feasable (key, value):
+		return key in store_dict
+	def data (key, value):
+		return store_dict[key]
+action_dict['get'] = GetAction
 
-def set_rollout_nb (x):
-	global sent_rollout_nb
-	sent_rollout_nb = x
+class GetLAction (Action):
+	def process (key, value):
+		pass
+	def feasable (key, value):
+		return key in store_dict and len(store_dict[key]) >= value
+	def data (key, value):
+		to_return = store_dict[key][-value:]
+		store_dict[key] = []
+		return to_return
+action_dict['get_l'] = GetLAction
+		
 
-
-# adr storage system
-
-adr_values = {}
-
-def store_adr (new_values):
-	adr_values.update(new_values)
-
-def adr_sendable ():
-	return True
-
-def send_adr ():
-	return adr_values
-
-# current node storage system
-
-cur_node = 0
-
-def store_node (new_values):
-	global cur_node
-	if new_values > cur_node:
-		for key in rollout_comp:
-			rollouts[key] = []
-			rollouts_nb[key] = 0
-	cur_node = max(cur_node, new_values)
-
-def node_sendable ():
-	return not cur_node == -1
-
-def send_node ():
-	return cur_node
-	
-
-
-# tags
+# tags to check for programm end
 DEFAULT = 0
 WORK_DONE = 1
 
-# global var
 is_work_done = False
 
-store_dict = {"weights" : store_weights, "critic" : store_critic, "primitive" : store_primitive, "rollout_nb" : set_rollout_nb, "adr" : store_adr, "node" : store_node}
-for key in rollout_comp:
-	store_dict[key] = lambda x, key=key : store_rollout(x, key)
-
-sendable_dict = {"weights" : weights_sendable, "critic" : critic_sendable, "primitive" : primitive_sendable, "dumped" : (lambda : True), "adr" : adr_sendable, "node" : node_sendable}
-for key in rollout_comp:
-	sendable_dict[key] = lambda key=key : rollout_sendable(key)
-
-send_dict = {"weights" : send_weights, "critic" : send_critic, "primitive" : send_primitive, "dumped" : (lambda : dumped_rollouts), "adr" : send_adr, "node" : send_node}
-for key in rollout_comp:
-	send_dict[key] = lambda key=key : send_rollout(key)
+# entry points :
 
 def start_warehouse (comm, my_rank, wh_rank):
 	global _comm
@@ -167,42 +117,28 @@ def work_loop ():
 			notified_procs += 1
 			print("notified_procs", notified_procs, flush=True)
 		
-		do_store = not "node" in data or data["node"] >= cur_node
-		
 		# process and store the message's data
 		# and add the message's request to the stack
-		for key, value in data.items():
-			if key == "request":
-				request_stack.append((status.Get_source(), value))
-				
-			elif do_store:
-				store_dict[key](value)
-					
+		process_incomming (data)
+		
+		request_stack.append((status.Get_source(), data))
+		
 					
 		# try to process the requests that can be
 		not_processed = []
 		while request_stack:
 			rank, request = request_stack.pop()
-			feasable = np.all([sendable_dict[req]() for req in request])
-			if feasable:
-				data = {req:send_dict[req]() for req in request}
-				tag = DEFAULT
+			if calc_feasable(request):
+				data = calc_data (request)
+				tag = WORK_DONE if is_work_done else DEFAULT
 				_comm.send(data, dest=rank, tag=tag)
 			else:
 				not_processed.append((rank, request))
 		
 		for x in not_processed:
 			request_stack.append(x)
-			"""
-			rank, req = x
-			print("wh: msg {} not processed".format(x), flush=True)
-			print("wh: feasable = {}".format(str([sendable_dict[req]() for req in request])))
-			print("wh: rollout_nb =", rollouts_nb)
-			#print("wh: rollouts =", rollouts)
-			"""
-		
-	
-	
+
+
 def send (data, work_done=False):
 	global is_work_done
 	
@@ -211,8 +147,20 @@ def send (data, work_done=False):
 	_comm.send(data, dest=_wh_rank, tag=tag)
 	
 	# wait for its response if there was a request in the msg
-	if "request" in data:
-		status = MPI.Status()
-		out_data =_comm.recv(source=_wh_rank, tag=MPI.ANY_TAG, status=status)
-		is_work_done = is_work_done or status.Get_tag() == WORK_DONE
-		return out_data
+	status = MPI.Status()
+	out_data =_comm.recv(source=_wh_rank, tag=MPI.ANY_TAG, status=status)
+	is_work_done = is_work_done or status.Get_tag() == WORK_DONE
+	return out_data
+
+
+# actual data-processing helpers
+
+def process_incomming (request):
+	for key, (action, value) in request.items():
+		action_dict[action].process(key, value)
+
+def calc_feasable (request):
+	return all([action_dict[action].feasable(key, value) for key, (action, value) in request.items()])
+
+def calc_data (request):
+	return {key:Entry(action=action, value=action_dict[action].data(key, value)) for key, (action, value) in request.items()}

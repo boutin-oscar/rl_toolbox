@@ -1,5 +1,5 @@
-
 import os
+import warehouse
 
 from models.actor import SimpleActor
 
@@ -21,6 +21,13 @@ class SimpleActorNode:
 			os.makedirs(actor.save_path)
 			actor.save_path += "/{}"
 			actor.save(actor.save_path)
+			
+			data_out = {str(proc_num)+":actor_weight":warehouse.Entry(action="set", value=actor.get_weights())}
+			data = warehouse.send(data_out)
+		
+		data_out = {str(proc_num)+":actor_weight":warehouse.Entry(action="get", value=None)}
+		data = warehouse.send(data_out)
+		actor.set_weights(data[str(proc_num)+":actor_weight"].value)
 
 from models.actor import MixtureOfExpert
 
@@ -213,7 +220,9 @@ class TrainPPONode:
 		self.mpi_role = mpi_role
 	
 	def run (self, save_path, proc_num, input_dict, output_dict):
-	
+		
+		pnid = str(proc_num)+":"
+		
 		env = input_dict['Environment'][0]
 		actor = input_dict['Actor'][0]
 		log_std = float(self.data['log_std_prop'])
@@ -243,16 +252,24 @@ class TrainPPONode:
 				# send the network weights
 				# and get the latest rollouts
 				req = ["s", "a", "r", "neglog", "mask", "dumped", "adr"]
-				msg = {"node":proc_num, "weights" : trainer.get_weights(), "rollout_nb":desired_rollout_nb, "request" : req}
+				msg = {	pnid+"weights" : warehouse.Entry(action="set", value=trainer.get_weights()),
+						pnid+"adr" : warehouse.Entry(action="get", value=None),
+						pnid+"s" : warehouse.Entry(action="get_l", value=desired_rollout_nb),
+						pnid+"a" : warehouse.Entry(action="get_l", value=desired_rollout_nb),
+						pnid+"r" : warehouse.Entry(action="get_l", value=desired_rollout_nb),
+						pnid+"neglog" : warehouse.Entry(action="get_l", value=desired_rollout_nb),
+						pnid+"mask" : warehouse.Entry(action="get_l", value=desired_rollout_nb),
+						}
 				data = warehouse.send(msg)
-				all_s = data["s"]
-				all_a = data["a"]
-				all_r = data["r"]
-				all_neglog = data["neglog"]
-				all_masks = data["mask"]
-				dumped_rollout_nb = data["dumped"]
+				all_s = data[pnid+"s"].value
+				all_a = data[pnid+"a"].value
+				all_r = data[pnid+"r"].value
+				all_neglog = data[pnid+"neglog"].value
+				all_masks = data[pnid+"mask"].value
+				#dumped_rollout_nb = data["dumped"].value
+				
 				if USE_ADR:
-					env.adr.update(data["adr"])
+					env.adr.update(data[pnid+"adr"].value)
 					env.adr.log()
 				
 				# update the network weights
@@ -263,6 +280,7 @@ class TrainPPONode:
 				n_rollouts = all_s.shape[0]
 				rollout_len = all_s.shape[1]
 				print("Epoch {} :".format(n), flush=True)
+				dumped_rollout_nb = "?"
 				print("Loaded {} rollouts for training while dumping {}.".format(n_rollouts, dumped_rollout_nb), flush=True)
 				dt = time.time() - start_time
 				start_time = time.time()

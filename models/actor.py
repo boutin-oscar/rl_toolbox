@@ -132,10 +132,8 @@ class SimpleActor (BaseActor):
 				print("WARNING (actor) : no blindfold available")
 				visible_obs = obs_ph
 				hidden_obs = obs_ph
-			print(inp_dim, visible_obs.shape)
 				
 			if self.use_blindfold and self.use_lstm:
-				print("lstm")
 				hidden_repr = visible_obs
 				hidden_repr = layers.Dense(128, activation='relu')(hidden_repr)
 				hidden_repr, *end_state = layers.LSTM(self.lstm_size, time_major=False, return_sequences=True, return_state=True)(hidden_repr, initial_state=init_state)
@@ -145,7 +143,6 @@ class SimpleActor (BaseActor):
 				self.hiddden_repr = hidden_repr
 			
 			elif not self.use_blindfold:
-				print("no blind")
 				hidden_repr = hidden_obs
 				hidden_repr = layers.Dense(128, activation='relu')(hidden_repr)
 				hidden_repr = layers.Dense(self.hidden_size, activation="relu")(hidden_repr)
@@ -155,7 +152,6 @@ class SimpleActor (BaseActor):
 				self.hiddden_repr = hidden_repr
 			
 			else:
-				print("nothing")
 				end_state = init_state
 				"""
 				shape = tf.shape(visible_obs)

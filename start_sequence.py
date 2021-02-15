@@ -1,11 +1,14 @@
 import sys
 import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 import shutil
 import xml.etree.ElementTree as ET
 from mpi4py import MPI
 
 import configuration.nodes
 import warehouse
+
 
 """
 exp_0 : no critic knowlege
@@ -131,6 +134,6 @@ if __name__ == "__main__":
 		
 		
 		# closing everything
-		warehouse.send({"node":len(proc_stack)}, work_done=True)
+		warehouse.send({}, work_done=True)
 	
 	

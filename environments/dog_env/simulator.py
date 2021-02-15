@@ -3,6 +3,7 @@ import pybullet as p
 import matplotlib.image as mpimg
 import time
 from pathlib import Path
+import os, sys
 
 """
 jointType : 
