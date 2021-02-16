@@ -261,11 +261,11 @@ class TrainPPONode:
 						pnid+"mask" : warehouse.Entry(action="get_l", value=desired_rollout_nb),
 						}
 				data = warehouse.send(msg)
-				all_s = data[pnid+"s"].value
-				all_a = data[pnid+"a"].value
-				all_r = data[pnid+"r"].value
-				all_neglog = data[pnid+"neglog"].value
-				all_masks = data[pnid+"mask"].value
+				all_s = np.concatenate(data[pnid+"s"].value, axis=0)
+				all_a = np.concatenate(data[pnid+"a"].value, axis=0)
+				all_r = np.concatenate(data[pnid+"r"].value, axis=0)
+				all_neglog = np.concatenate(data[pnid+"neglog"].value, axis=0)
+				all_masks = np.concatenate(data[pnid+"mask"].value, axis=0)
 				#dumped_rollout_nb = data["dumped"].value
 				
 				if USE_ADR:
@@ -298,46 +298,45 @@ class TrainPPONode:
 				trainer = PPO_cat(env, actor, Critic(env), init_log_std=log_std)
 			rollout_len = int(self.data['rollout_len_prop'])
 			#data = warehouse.send({"request":["node"]}) ; self.data['name'] == data['node']"
-			msg = {"request" : ["weights", "node"]}
+			msg = {	pnid+"weights" : warehouse.Entry(action="get", value=None),
+					pnid+"adr" : warehouse.Entry(action="set", value={}),
+					"pnid" : warehouse.Entry(action="get", value=None)}
 			data = warehouse.send(msg)
 			
-			while proc_num > data["node"]:
-				time.sleep(0.3)
-				data = warehouse.send(msg)
-			
-			while proc_num == data["node"]:
+			while proc_num == data["pnid"].value and not warehouse.is_work_done:
 				test_adr = USE_ADR and np.random.random() < float(self.data['adr_prob_prop'])
 				
 				env.test_adr = test_adr
 				
 				#print(data["weights"][0], flush=True)
-				trainer.set_weights (data["weights"])
+				trainer.set_weights (data[pnid+"weights"].value)
 				
 				if test_adr:
 					# simulate rollout
 					all_s, all_a, all_r, all_neglog, all_mask = trainer.get_rollout(env.adr_rollout_len)
 					
-					msg = {"node":proc_num, 
-							"adr" : env.adr.get_msg(),
-							"request" : ["weights", "adr", "node"]}
+					msg = {	pnid+"adr" : warehouse.Entry(action="update", value=env.adr.get_msg()),
+							pnid+"weights" : warehouse.Entry(action="get", value=None),
+							"pnid" : warehouse.Entry(action="get", value=None)}
 				else:
 					# simulate rollout
 					all_s, all_a, all_r, all_neglog, all_mask = trainer.get_rollout(rollout_len)
 					
 					# send rollout back to warehouse
 					# and get network weights and update actor
-					msg = {"node":proc_num, 
-							"s" : all_s,
-							"a" : all_a,
-							"r" : all_r,
-							"neglog" : all_neglog,
-							"mask" : all_mask,
-							"request" : ["weights", "adr", "node"]}
+					msg = {	pnid+"s" : warehouse.Entry(action="add", value=all_s),
+							pnid+"a" : warehouse.Entry(action="add", value=all_a),
+							pnid+"r" : warehouse.Entry(action="add", value=all_r),
+							pnid+"neglog" : warehouse.Entry(action="add", value=all_neglog),
+							pnid+"mask" : warehouse.Entry(action="add", value=all_mask),
+							pnid+"weights" : warehouse.Entry(action="get", value=None),
+							pnid+"adr" : warehouse.Entry(action="get", value=None), 
+							"pnid" : warehouse.Entry(action="get", value=None)}
 					
 				data = warehouse.send(msg)
 				
 				if USE_ADR:
-					env.adr.update(data["adr"])
+					env.adr.update(data[pnid+"adr"].value)
 		
 		
 		output_dict['Trained actor'] = trainer.actor

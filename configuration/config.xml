@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <TrainingRun>
 	<Processes>
-		<Process adr_prob_prop="0.30000001192092896" epoch_nb_prop="2" log_std_prop="-1.0" model_save_interval_prop="10" name="Train (PPO)" ppo_cat_prop="0" rollout_len_prop="400" rollout_nb_prop="4" train_step_nb_prop="6" type="TrainPPONode"/>
+		<Process adr_prob_prop="0.30000001192092896" epoch_nb_prop="20000" log_std_prop="-1.0" model_save_interval_prop="10" name="Train (PPO)" ppo_cat_prop="0" rollout_len_prop="400" rollout_nb_prop="10" tensorboard_name_prop="experts" train_step_nb_prop="6" type="TrainPPONode"/>
 		<Process base_rot_rew_prop="1" carthesian_act_prop="1" full_parkour_prop="1" mode_prop="0" name="Dog Env" rand_delta_prop="0" simple_walk_prop="0" type="DogEnvNode"/>
 		<Process activation_prop="relu" blindfold_prop="1" first_size_prop="512" lstm_prop="0" name="Simple Actor" save_name_prop="expert" secound_size_prop="256" type="SimpleActorNode"/>
 	</Processes>

@@ -1,6 +1,6 @@
 import sys
 import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 import shutil
 import xml.etree.ElementTree as ET
@@ -34,6 +34,7 @@ class ProcessNode:
 		self.proc.mpi_rank = mpi_rank
 		
 	def run (self, save_paths, proc_num):
+		warehouse.send({"pnid": warehouse.Entry(action="set_max", value=proc_num)})
 		self.proc.run(save_paths, proc_num, self.input_dict, self.output_dict)
 
 DEBUG = True

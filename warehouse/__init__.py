@@ -39,6 +39,18 @@ class SetAction (Action):
 		return
 action_dict['set'] = SetAction
 	
+class SetMaxAction (Action):
+	def process (key, value):
+		if key in store_dict:
+			store_dict[key] = max(store_dict[key], value)
+		else:
+			store_dict[key] = value
+	def feasable (key, value):
+		return True
+	def data (key, value):
+		return
+action_dict['set_max'] = SetMaxAction
+	
 class AddAction (Action):
 	def process (key, value):
 		if not key in store_dict:
@@ -58,7 +70,7 @@ class UpdateAction (Action):
 	def feasable (key, value):
 		return True
 	def data (key, value):
-		return
+		return store_dict[key]
 action_dict['update'] = UpdateAction
 		
 class GetAction (Action):
@@ -113,9 +125,10 @@ def work_loop ():
 	while notified_procs < num_procs:
 		# wait for new message
 		data =_comm.recv(source=MPI.ANY_SOURCE, tag=MPI.ANY_TAG, status=status)
+		is_work_done = is_work_done or status.Get_tag() == WORK_DONE
 		if status.Get_tag() == WORK_DONE:
 			notified_procs += 1
-			print("notified_procs", notified_procs, flush=True)
+			print("notified_procs : {}/{}".format(notified_procs, num_procs), flush=True)
 		
 		# process and store the message's data
 		# and add the message's request to the stack
