@@ -9,6 +9,7 @@ from configuration.config import main_programm
 import warehouse
 
 """
+mpiexec -n 4 python start_training.py exp_0
 mpiexec -n 32 python start_training.py exp_0
 
 tensorboard --logdir=results/exp_0/tensorboard --host localhost --port 6006

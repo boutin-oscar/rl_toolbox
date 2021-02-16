@@ -1,6 +1,7 @@
 import os
 
 import configuration.processes as nodes
+from ppo.node import train_ppo
 
 def test_ppo ():
 	
@@ -27,8 +28,8 @@ def test_ppo ():
 						adr_test_prob = 0.3,
 						tensorboard_path = os.path.join(exp_path, "tensorboard", "expert"))
 	
-	#nodes.train_ppo(actor, env, **ppo_config_test)
-	nodes.train_ppo(actor, env, **ppo_config)
+	train_ppo(actor, env, **ppo_config_test)
+	#train_ppo(actor, env, **ppo_config)
 
 
 
