@@ -40,17 +40,19 @@ def test_rts ():
 	import configuration.processes as nodes
 	from ppo.node import train_ppo
 	from rts.env import Simulator, RealEnv, SuperEnv, TunableEnv
+	from rts.networks import create_actor, create_dq_actor, create_disc
 
 	exp_path = nodes.setup_exp()
 	
+	
 	sim = Simulator()
 	
-	
-	
-	actor = nodes.simple_actor(env, save_path = os.path.join(exp_path, "models", "expert", "{}"), use_blindfold = True)
+	actor = create_actor(sim, save_path = os.path.join(exp_path, "models", "expert", "{}"))
+	dq_actor = create_dq_actor(sim, save_path = os.path.join(exp_path, "models", "dq", "{}"))
+	disc = create_disc(sim, save_path = os.path.join(exp_path, "models", "disc", "{}"))
 	
 
 
 
 # entry point of the distributed programm, selection of the algorithm
-main_programm = test_ppo
+main_programm = test_rts

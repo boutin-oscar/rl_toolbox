@@ -57,11 +57,11 @@ class SimpleActor (BaseActor):
 		self.action_layers.append(layers.Dense(128, activation=activation))
 		self.action_layers.append(layers.Dense(64, activation=activation))
 		
-		full_repr = obs_ph
+		full_repr = visible_obs
 		for layer in self.action_layers:
 			full_repr = layer(full_repr)
 		
-		skip = obs_ph
+		skip = visible_obs
 		
 		last_layer = layers.Dense(act_dim, activation='sigmoid')
 		self.action_layers.append(last_layer)

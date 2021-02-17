@@ -11,11 +11,8 @@ class Simulator:
 		kill_range_q = np.asarray([1, 1]).reshape((2,1)) * 2
 
 
-		obs_dim = A.shape[1]
-		act_dim = B.shape[1]
-
-		obs_mean = np.zeros(obs_dim)
-		obs_std = np.ones(obs_dim)
+		self.obs_dim = A.shape[1]
+		self.act_dim = B.shape[1]
 
 		def linear_step (q, act):
 			u = 2*np.maximum(np.minimum(act, 1), 0).reshape((act.flatten().shape[0], 1)) - 1
