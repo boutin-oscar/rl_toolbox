@@ -46,7 +46,7 @@ class SimpleActor (BaseActor):
 			visible_obs = blindfold.select_visible(obs_ph)
 			hidden_obs = blindfold.select_hidden(obs_ph)
 		else:
-			print("WARNING (actor) : no blindfold available")
+			print("WARNING (actor) : no blindfold available", flush=True)
 			visible_obs = obs_ph
 			hidden_obs = obs_ph
 		

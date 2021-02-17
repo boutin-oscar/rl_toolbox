@@ -15,7 +15,7 @@ class SimpleCritic ():
 			if hasattr(env, 'obs_mean'):
 				obs_ph = (obs_ph-env.obs_mean)/env.obs_std
 			else:
-				print("WARNING (critic) : no obs range definded. Proceed with caution")
+				print("WARNING (critic) : no obs range definded. Proceed with caution", flush=True)
 			
 			mean = obs_ph
 			mean = layers.Dense(1024, activation='relu')(mean)
