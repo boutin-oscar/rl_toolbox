@@ -1,10 +1,9 @@
 import os
 
-import configuration.processes as nodes
-from ppo.node import train_ppo
-
 def test_ppo ():
-	
+	import configuration.processes as nodes
+	from ppo.node import train_ppo
+
 	exp_path = nodes.setup_exp()
 	
 	env = nodes.dog_env ()
@@ -32,7 +31,21 @@ def test_ppo ():
 	#train_ppo(actor, env, **ppo_config)
 
 
+def test_rts ():
+	import configuration.processes as nodes
+	from ppo.node import train_ppo
+	from rts.env import Simulator, RealEnv, SuperEnv, TunableEnv
+
+	exp_path = nodes.setup_exp()
+	
+	sim = Simulator()
+	
+	
+	
+	actor = nodes.simple_actor(env, save_path = os.path.join(exp_path, "models", "expert", "{}"), use_blindfold = True)
+	
+
 
 
 # entry point of the distributed programm, selection of the algorithm
-main_programm = test_ppo
+main_programm = test_rts

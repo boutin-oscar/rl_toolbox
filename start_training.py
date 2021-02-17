@@ -34,7 +34,7 @@ if __name__ == "__main__":
 		main_programm ()
 		warehouse.send({}, work_done=True)
 	
-	print("Thread {} has ended cleanly.".format(my_rank)) 
+	print("Thread {} has ended neatly.".format(my_rank)) 
 	
 	
 	
