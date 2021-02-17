@@ -7,7 +7,12 @@ def test_ppo ():
 	exp_path = nodes.setup_exp()
 	
 	env = nodes.dog_env ()
-	actor = nodes.simple_actor(env, save_path = os.path.join(exp_path, "models", "expert", "{}"), use_blindfold = True)
+	actor = nodes.simple_actor(	obs_dim = env.obs_dim,
+								act_dim = env.act_dim, 
+								obs_mean = env.obs_mean, 
+								obs_std = env.obs_std, 
+								blindfold = env.blindfold,
+								save_path = os.path.join(exp_path, "models", "expert", "{}"))
 	
 	ppo_config_test = dict(	epoch_nb = 2, # 20000,
 						rollout_per_epoch = 10,
@@ -27,8 +32,8 @@ def test_ppo ():
 						adr_test_prob = 0.3,
 						tensorboard_path = os.path.join(exp_path, "tensorboard", "expert"))
 	
-	train_ppo(actor, env, **ppo_config_test)
-	#train_ppo(actor, env, **ppo_config)
+	#train_ppo(actor, env, **ppo_config_test)
+	train_ppo(actor, env, **ppo_config)
 
 
 def test_rts ():
@@ -48,4 +53,4 @@ def test_rts ():
 
 
 # entry point of the distributed programm, selection of the algorithm
-main_programm = test_rts
+main_programm = test_ppo

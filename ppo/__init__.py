@@ -42,7 +42,7 @@ class PPO:
 	
 	@tf.function
 	def create_neglogp (self, full_state, x):
-		action, new_state = self.actor.model(full_state)
+		action = self.actor.model(full_state)
 		return self.create_neglogp_act(action, x)
 	
 	def create_neglogp_act (self, act, x):
@@ -56,7 +56,7 @@ class PPO:
 		# randomize actor (exploration)
 		with tf.name_scope("randomizer"):
 			with tf.name_scope("stochastic"):
-				self.logstd = tf.Variable(np.ones((self.actor.act_dim,))*self.init_log_std, dtype=tf.float32, trainable=True) # ---------- is the std trainable ???
+				self.logstd = tf.Variable(np.ones((self.actor.act_dim,))*self.init_log_std, dtype=tf.float32, trainable=True) # ---------- should the std be trainable ???
 				self.actor.logstd = self.logstd
 	
 		self.trainable_variables = [self.logstd]
@@ -66,29 +66,29 @@ class PPO:
 					self.trainable_variables = self.trainable_variables + layer.trainable_weights
 		
 	@tf.function
-	def step (self, obs, state, deterministic=False):
+	def step (self, obs, deterministic=False):
 		if deterministic:
 			
-			action, final_state = self.actor.model((obs, state))
+			action = self.actor.model(obs)
 			neglog = np.zeros(tf.shape(action).numpy()[:-1])
 		else:
-			action, final_state = self.actor.model((obs, state))
+			action = self.actor.model(obs)
 			if hasattr(self.env, 'act_a'):
 				action += tf.exp(self.logstd) * tf.random.normal(tf.shape(action))# * self.env.act_a
 			else:
 				action += tf.exp(self.logstd) * tf.random.normal(tf.shape(action))
-			neglog = self.create_neglogp ((obs, state), action)
-		return action, final_state, neglog
+			neglog = self.create_neglogp (obs, action)
+		return action, neglog
 	
 	@tf.function
-	def calc_value(self, obs, state):
-		value, end_state = self.critic.model((obs, state))
+	def calc_value(self, obs):
+		value = self.critic.model(obs)
 		return value
 	
-	def compute_loss (self, n_step, do_log, actor_init_state, critic_init_state, obs, action, advantage, new_value, reward, old_neglog, old_value, mask, learning_rate = 2.5e-4, actor_clip_range = 0.2, critic_clip_range = 1):
+	def compute_loss (self, n_step, do_log, obs, action, advantage, new_value, reward, old_neglog, old_value, mask, learning_rate = 2.5e-4, actor_clip_range = 0.2, critic_clip_range = 1):
 		with tf.name_scope("training"):
 			with tf.name_scope("critic"):
-				cur_value, _ = self.critic.model((obs, critic_init_state))
+				cur_value = self.critic.model(obs)
 				deltavclipped = old_value + tf.clip_by_value(cur_value - old_value, -actor_clip_range, actor_clip_range)
 				critic_losses1 = tf.square(cur_value - new_value)
 				critic_losses2 = tf.square(deltavclipped - new_value)
@@ -99,7 +99,7 @@ class PPO:
 		
 			with tf.name_scope("actor"):
 				with tf.name_scope("train_neglog"):
-					train_neglog = self.create_neglogp((obs, actor_init_state), action)
+					train_neglog = self.create_neglogp(obs, action)
 				with tf.name_scope("ratio"):
 					ratio = tf.exp(old_neglog - train_neglog)
 				with tf.name_scope("loss"):
@@ -119,7 +119,7 @@ class PPO:
 			
 			if self.USE_SYMETRY:
 				with tf.name_scope("symetry"):
-					symetry_loss = self.env.symetry.loss(self.actor, obs, actor_init_state, mask)
+					symetry_loss = self.env.symetry.loss(self.actor, obs, mask)
 				
 			with tf.name_scope("loss"):
 				#self.loss = self.actor_loss - self.entropy * 0.01 + self.critic_loss * 0.5
@@ -146,11 +146,9 @@ class PPO:
 		return loss
 	
 	@tf.function 
-	def train_step (self, n_step, do_log, actor_init_state, critic_init_state, obs, action, advantage, new_value, reward, old_neglog, old_value, mask, learning_rate = 2.5e-4, actor_clip_range = 0.2, critic_clip_range = 1):
+	def train_step (self, n_step, do_log, obs, action, advantage, new_value, reward, old_neglog, old_value, mask, learning_rate = 2.5e-4, actor_clip_range = 0.2, critic_clip_range = 1):
 		with tf.GradientTape() as tape:
 			loss = self.compute_loss(n_step = n_step, do_log = do_log,
-									actor_init_state = actor_init_state,
-									critic_init_state = critic_init_state,
 									obs = obs,
 									action = action,
 									advantage = advantage,
@@ -175,7 +173,6 @@ class PPO:
 		if current_s is None:
 			current_s = self.env.reset()
 			current_s = np.expand_dims(np.stack(current_s), axis=1)
-		current_actor_init_state = self.actor.get_init_state(self.env.num_envs)
 		
 		is_env_done = [False for i in range(self.env.num_envs)]
 		all_s = [[] for i in range(self.env.num_envs)]
@@ -187,14 +184,12 @@ class PPO:
 		n_env_done = 0
 		t = 0
 		
-		while t < rollout_len:#config.training["rollout_len"]:
+		while t < rollout_len:
 			t += 1
 			current_s = np.asarray(current_s, dtype=np.float32)
-			scaled_s = self.actor.scaler.scale_obs(current_s)
-			current_a, current_actor_init_state, current_neglog = self.step (scaled_s, current_actor_init_state)
+			current_a, current_neglog = self.step (current_s)
 			current_a = current_a.numpy()
 			current_neglog = current_neglog.numpy()
-			#print(current_a.shape)
 			current_new_s, current_r, current_done = self.env.step(current_a)
 			
 			n_env_done = 0
@@ -202,8 +197,7 @@ class PPO:
 			for i, (s, a, neglog, r, done) in enumerate(zip(current_s, current_a, current_neglog, current_r, current_done)):
 				all_s[i].append(s[0])
 				all_a[i].append(a[0])
-				all_neglog[i].append(neglog[0]) #this worked fine until now, but for some reason, it does not anymore
-				#all_neglog[i].append(neglog)
+				all_neglog[i].append(neglog[0])
 				if not is_env_done[i]:
 					all_r[i].append(r)
 					all_masks[i].append(1)
@@ -231,10 +225,9 @@ class PPO:
 	
 	def calc_gae (self, all_s, all_r, all_masks):
 		num_envs = all_s.shape[0]
-		scaled_s = self.actor.scaler.scale_obs(all_s)
 		
 		# --- calculating gae ---
-		val = self.calc_value(scaled_s, self.critic.get_init_state(num_envs)).numpy()
+		val = self.calc_value(all_s).numpy()
 		all_last_values = val * all_masks + all_r * (1-all_masks) / (1-self.gamma)
 		
 		
@@ -255,14 +248,6 @@ class PPO:
 	
 	def train_networks (self, n, all_s, all_a, all_r, all_neglog, all_masks, train_step_nb, all_last_values, all_gae, all_new_value):
 		num_envs = all_s.shape[0]
-		#all_last_values, all_gae, all_new_value = calc_gae(all_s, all_r)
-		
-		self.actor.scaler.update(all_s)#*np.expand_dims(all_masks, axis=2))
-		
-		if self.USE_SYMETRY:
-			self.actor.scaler.update(self.env.symetry.state_symetry(all_s))
-		
-		scaled_s = self.actor.scaler.scale_obs(all_s)
 		
 		# --- training the networks ---
 		for i in range(train_step_nb):
@@ -270,9 +255,7 @@ class PPO:
 			do_log = tf.convert_to_tensor((n%self.log_interval==0 and i == 0), dtype=tf.bool)
 			
 			self.train_step(n_step = n_step, do_log=do_log, 
-								actor_init_state = self.actor.get_init_state(num_envs),
-								critic_init_state = self.critic.get_init_state(num_envs),
-								obs = scaled_s,
+								obs = all_s,
 								action = all_a,
 								advantage = all_gae,
 								new_value = all_new_value,

@@ -54,12 +54,14 @@ def dog_env ():
 	return env
 
 @process_node
-def simple_actor (env, save_path, use_blindfold):
+def simple_actor (obs_dim, act_dim, obs_mean=None, obs_std=None, blindfold=None, inp_dim=None, save_path=None):
 	import os
-
 	from models.actor import SimpleActor
 	
-	actor = SimpleActor (env, use_blindfold, False)
+	if save_path is None:
+		raise NameError("A save_path should always be given to an actor")
+		
+	actor = SimpleActor (obs_dim, act_dim, obs_mean=obs_mean, obs_std=obs_std, blindfold=blindfold, inp_dim=inp_dim)
 	actor.save_path = save_path
 	
 	if mpi_role == 'main':
