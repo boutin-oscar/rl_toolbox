@@ -3,7 +3,7 @@ import numpy as np
 
 import warehouse
 
-
+my_rank = 0
 mpi_role = 'not set'
 proc_num = 0
 pnid = "0:"
@@ -16,7 +16,7 @@ def process_node (func):
 		global pnid
 		proc_num += 1
 		pnid = str(proc_num)+":"
-		warehouse.send({"pnid": warehouse.Entry(action="set_max", value=pnid)})
+		warehouse.send({"proc_num": warehouse.Entry(action="set_max", value=proc_num)})
 		return func(*args, **kwargs)
 	return node_wrapper
 
@@ -77,7 +77,17 @@ def simple_actor (obs_dim, act_dim, obs_mean=None, obs_std=None, blindfold=None,
 	
 	return actor
 
-
+@process_node
+def load_actor (actor, path):
+	if mpi_role == 'main':
+		actor.load(path)
+		
+		data_out = {pnid+":actor_weight":warehouse.Entry(action="set", value=actor.get_weights())}
+		data = warehouse.send(data_out)
+	
+	data_out = {pnid+":actor_weight":warehouse.Entry(action="get", value=None)}
+	data = warehouse.send(data_out)
+	actor.set_weights(data[pnid+":actor_weight"].value)
 
 
 

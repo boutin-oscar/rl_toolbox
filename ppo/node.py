@@ -76,10 +76,10 @@ def train_ppo (actor, env, epoch_nb, rollout_per_epoch, rollout_len, train_step_
 		
 		msg = {	pnid+"weights" : warehouse.Entry(action="get", value=None),
 				pnid+"adr" : warehouse.Entry(action="set", value={}),
-				"pnid" : warehouse.Entry(action="get", value=None)}
+				"proc_num" : warehouse.Entry(action="get", value=None)}
 		data = warehouse.send(msg)
 		
-		while pnid == data["pnid"].value and not warehouse.is_work_done:
+		while proc_num >= data["proc_num"].value and not warehouse.is_work_done:
 			test_adr = USE_ADR and np.random.random() < adr_test_prob
 			
 			env.test_adr = test_adr
@@ -92,7 +92,7 @@ def train_ppo (actor, env, epoch_nb, rollout_per_epoch, rollout_len, train_step_
 				
 				msg = {	pnid+"adr" : warehouse.Entry(action="update", value=env.adr.get_msg()),
 						pnid+"weights" : warehouse.Entry(action="get", value=None),
-						"pnid" : warehouse.Entry(action="get", value=None)}
+						"proc_num" : warehouse.Entry(action="get", value=None)}
 			else:
 				# simulate rollout
 				all_s, all_a, all_r, all_neglog, all_mask = trainer.get_rollout(rollout_len)
@@ -106,7 +106,7 @@ def train_ppo (actor, env, epoch_nb, rollout_per_epoch, rollout_len, train_step_
 						pnid+"mask" : warehouse.Entry(action="add", value=all_mask),
 						pnid+"weights" : warehouse.Entry(action="get", value=None),
 						pnid+"adr" : warehouse.Entry(action="get", value=None), 
-						"pnid" : warehouse.Entry(action="get", value=None)}
+						"proc_num" : warehouse.Entry(action="get", value=None)}
 				
 			data = warehouse.send(msg)
 			

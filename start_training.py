@@ -26,6 +26,7 @@ if __name__ == "__main__":
 	my_name = MPI.Get_processor_name()
 	mpi_role = 'main' if my_rank == 0 else ('wh' if my_rank == 1 else 'worker')
 	nodes.mpi_role = mpi_role
+	nodes.my_rank = my_rank
 	
 	
 	warehouse.start_warehouse(comm, my_rank, 1)
