@@ -25,24 +25,26 @@ class TunableEnv:
 	def run_internal_actor (self, inp):
 		return self.actor.model(inp)
 	
+	def calc_dq_real (self, act): # calculating the dq that simulates solid friction
+		lin_s, u = self.sim.linear_step (self.q, act)
+		dq = np.asarray([0, -lin_s[1,0]]).reshape(lin_s.shape)
+		dq = np.maximum(np.minimum(dq, self.max_f), -self.max_f)
+		self.dq = dq
+		
 	
 	def step (self, dq_act):
 		
 		full_trans = [self.q.flatten()]
 		
-		dq_act = np.maximum(np.minimum(dq_act, 1), -1)
+		dq_act = np.maximum(np.minimum(dq_act, 1), 0)
 		dq = (dq_act*2-1)*self.max_f
 		self.dq = dq.reshape(self.q.shape)
 		
-		"""# --- real dq --- 
-		lin_s, u = sim.linear_step (self.q, self.a)
-		dq = np.asarray([0, -lin_s[1,0]]).reshape(lin_s.shape)
-		dq = np.maximum(np.minimum(dq, self.max_f), -self.max_f)
-		"""# ---------------
+		#self.calc_dq_real(self.act) # calculation of the real dq. (has to be removed)
 		
 		self.q, u = self.sim.step(self.q, self.dq, self.act)
 		
-		full_trans.append(self.q.flatten())
+		full_trans.append((self.q.flatten()-full_trans[0])*10)
 		full_trans.append(self.act.flatten())
 		full_trans = np.concatenate(full_trans).reshape((1, -1))
 		

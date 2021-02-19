@@ -4,7 +4,7 @@ import numpy as np
 from collections import namedtuple
 
 # the singe element that holds all the data
-store_dict = {}
+store_dict = {"dumped":0}
 
 
 # a msg is always a dict of Entries. 
@@ -89,6 +89,7 @@ class GetLAction (Action):
 		return key in store_dict and len(store_dict[key]) >= value
 	def data (key, value):
 		to_return = store_dict[key][-value:]
+		store_dict["dumped"] = len(store_dict[key]) - value
 		store_dict[key] = []
 		return to_return
 action_dict['get_l'] = GetLAction

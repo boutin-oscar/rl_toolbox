@@ -31,7 +31,6 @@ def train_ppo (actor, env, epoch_nb, rollout_per_epoch, rollout_len, train_step_
 		for n in range(epoch_nb):
 			# send the network weights
 			# and get the latest rollouts
-			req = ["s", "a", "r", "neglog", "mask", "dumped", "adr"]
 			msg = {	pnid+"weights" : warehouse.Entry(action="set", value=trainer.get_weights()),
 					pnid+"adr" : warehouse.Entry(action="get", value=None),
 					pnid+"s" : warehouse.Entry(action="get_l", value=rollout_per_epoch),
@@ -39,6 +38,7 @@ def train_ppo (actor, env, epoch_nb, rollout_per_epoch, rollout_len, train_step_
 					pnid+"r" : warehouse.Entry(action="get_l", value=rollout_per_epoch),
 					pnid+"neglog" : warehouse.Entry(action="get_l", value=rollout_per_epoch),
 					pnid+"mask" : warehouse.Entry(action="get_l", value=rollout_per_epoch),
+					"dumped" : warehouse.Entry(action="get", value=None)
 					}
 			data = warehouse.send(msg)
 			all_s = np.concatenate(data[pnid+"s"].value, axis=0)
@@ -46,7 +46,7 @@ def train_ppo (actor, env, epoch_nb, rollout_per_epoch, rollout_len, train_step_
 			all_r = np.concatenate(data[pnid+"r"].value, axis=0)
 			all_neglog = np.concatenate(data[pnid+"neglog"].value, axis=0)
 			all_masks = np.concatenate(data[pnid+"mask"].value, axis=0)
-			#dumped_rollout_nb = data["dumped"].value
+			dumped_rollout_nb = data["dumped"].value
 			
 			if USE_ADR:
 				env.adr.update(data[pnid+"adr"].value)
@@ -60,7 +60,7 @@ def train_ppo (actor, env, epoch_nb, rollout_per_epoch, rollout_len, train_step_
 			n_rollouts = all_s.shape[0]
 			cur_rollout_len = all_s.shape[1]
 			print("Epoch {} :".format(n), flush=True)
-			dumped_rollout_nb = "?"
+			#dumped_rollout_nb = "?"
 			print("Loaded {} rollouts for training while dumping {}.".format(n_rollouts, dumped_rollout_nb), flush=True)
 			dt = time.time() - start_time
 			start_time = time.time()

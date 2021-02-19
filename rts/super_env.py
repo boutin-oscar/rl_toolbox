@@ -21,16 +21,25 @@ class SuperEnv:
 		return self.dq_actor.model(inp)
 	
 	def calc_dq (self, act):
-		u = np.maximum(np.minimum(2*act-1, 1), -1)
 		dq_act = self.run_internal_model(self.dq_obs(self.q, act))[0].numpy()
 		dq = (2*dq_act-1) * self.max_f
 		dq = dq.reshape(self.q.shape)
+		self.dq = dq
+		#self.dq[0,0] = 0
+		
+	def calc_dq_real (self, act): # calculating the dq that simulates solid friction
+		lin_s, u = self.sim.linear_step (self.q, act)
+		dq = np.asarray([0, -lin_s[1,0]]).reshape(lin_s.shape)
+		dq = np.maximum(np.minimum(dq, self.max_f), -self.max_f)
 		self.dq = dq
 		
 	
 	def step (self, act):
 	
 		self.calc_dq(act)
+		to_print = str(self.dq)
+		# self.calc_dq_real(act)
+		# print("{}, {}".format(to_print, self.dq), flush=True)
 		nq, u = self.sim.step(self.q, self.dq, act)
 		
 		rew = self.sim.calc_rew(self.q, u, nq)
