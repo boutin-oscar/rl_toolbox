@@ -10,7 +10,7 @@ import time
 import pybullet as p
 
 from environments.dog_env import DogEnv
-from models.actor import SimpleActor, MixtureOfExpert, LSTMActor
+from models.actor import SimpleActor
 import models.lite_model as lite
 #lite.load('distribution/exp_2/model.tflite')
 
@@ -31,17 +31,11 @@ if __name__ == '__main__':
 	#path = "results\\dog_working\\models\\expert\\{}"
 	#path = "results\\exp_0_0\\models\\expert\\{}"
 	#path = "results\\exp_2_best_guess\\models\\expert\\{}"
-	path = "results\\exp_0\\models\\expert\\{}"
+	path = "results\\exp_2_dog(blind)\\models\\expert\\{}"
 	#path = "results\\exp_0\\models\\teacher\\{}"
 	
 	
-	if actor_type=="mix":
-		primitives = [SimpleActor(env) for i in range(2)]
-		actor = MixtureOfExpert(env, primitives, debug=True)
-	elif actor_type == "simple":
-		actor = SimpleActor(env, use_blindfold=True, use_lstm=False)
-	elif actor_type == "lstm":
-		actor = LSTMActor(env)
+	actor = SimpleActor(env.obs_dim, env.act_dim, env.obs_mean, env.obs_std, blindfold=env.blindfold)
 	
 	if load_trained:
 		actor.load(path)
@@ -54,8 +48,6 @@ if __name__ == '__main__':
 	#env.training_mode = 1
 	loc_config = {'init_floating':False} # {'gain_p': 0.00698, 'gain_d': 0.30}
 	obs = env.reset (config = loc_config)
-	obs = actor.scaler.scale_obs(obs)
-	init_state = actor.get_init_state(env.num_envs)
 	
 	all_rew = []
 	all_rew2 = []
@@ -161,7 +153,7 @@ if __name__ == '__main__':
 		obs = np.expand_dims(np.asarray(obs, dtype=np.float32), axis=1)
 		start = time.time()
 		#act, init_state = actor.model((obs, init_state))
-		act, init_state = actor.model((obs, init_state))
+		act = actor.model(obs)
 		
 		if actor_type=="mix":
 			all_inf.append(actor.inf_model((obs, init_state))[0].numpy())
@@ -181,7 +173,6 @@ if __name__ == '__main__':
 			to_add.append(x.step() * x.a)
 		all_rew2.append(to_add)
 		
-		obs = actor.scaler.scale_obs(np.asarray(obs))
 		all_obs.append(obs)
 		all_rew.append(rew[0])
 		all_dev.append(env.dev)
